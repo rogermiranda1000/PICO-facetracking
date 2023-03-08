@@ -35,14 +35,14 @@ public class TrackingGetter : MonoBehaviour {
     }
 
     private void startService() {
-        this._customClass.CallStatic("StartCheckerService");
+        this._customClass.CallStatic("StartManager");
     }
 
-    void Update() {
+    /*void Update() {
         Vector3 v;
         bool result = PXR_EyeTracking.GetCombineEyeGazeVector(out v);
         if (!result) return;
         logger.text = v.ToString();
-        //this._send.Send(v.ToString());
-    }
+        this._send.Send(v.ToString());
+    }*/
 }

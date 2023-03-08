@@ -14,7 +14,8 @@ public final class FacetrackingSenderStarter {
         myActivity = tempActivity;
     }
 
-    public static void StartCheckerService() {
-        myActivity.startService(new Intent(myActivity, FacetrackingSender.class));
+    public static void StartManager() {
+        Intent serviceIntent = new Intent(myActivity, FacetrackingSender.class);
+        myActivity.startService(serviceIntent);
     }
 }

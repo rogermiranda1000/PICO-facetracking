@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 3540927}
   - component: {fileID: 3540926}
   - component: {fileID: 3540929}
+  - component: {fileID: 3540930}
   m_Layer: 0
   m_Name: XR Rig
   m_TagString: Untagged
@@ -224,6 +225,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useAudio: 1
   logger: {fileID: 1890414298}
+--- !u!114 &3540930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3540925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1606532e49fcf54a94feab8ab0817dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &59231943
 GameObject:
   m_ObjectHideFlags: 0

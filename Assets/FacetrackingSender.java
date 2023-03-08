@@ -7,6 +7,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
+import com.unity3d.player.UnityPlayer;
 
 public class FacetrackingSender extends Service {
     private static final String CHANNEL_ID = "ForegroundServiceChannel";
@@ -29,20 +30,18 @@ public class FacetrackingSender extends Service {
 
         startForeground(1, notification);
 
-        this.senderThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    UDPSocket send = new UDPSocket();
-                    send.Client("192.168.1.101", 27000);
+        this.senderThread = new Thread(() -> {
+            try {
+                UDPSocket send = new UDPSocket();
+                send.Client("192.168.1.101", 27000);
 
-                    while (true) {
-                        send.Send("hello?");
-                        Thread.sleep(2000);
-                    }
-                } catch (Exception ex) {
-                    System.err.printf(ex.toString()); // TODO ignore interrrupted sleep
+                while (true) {
+                    send.Send("hello?");
+                    UnityPlayer.UnitySendMessage("XR Rig", "myAction", "");
+                    Thread.sleep(2000);
                 }
+            } catch (Exception ex) {
+                System.err.printf(ex.toString()); // TODO ignore interrrupted sleep
             }
         });
         this.senderThread.start();
@@ -51,15 +50,13 @@ public class FacetrackingSender extends Service {
     }
 
     private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel serviceChannel = new NotificationChannel(
-                    CHANNEL_ID,
-                    "Foreground Service Channel",
-                    NotificationManager.IMPORTANCE_DEFAULT
-            );
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(serviceChannel);
-        }
+        NotificationChannel serviceChannel = new NotificationChannel(
+                CHANNEL_ID,
+                "Foreground Service Channel",
+                NotificationManager.IMPORTANCE_DEFAULT
+        );
+        NotificationManager manager = getSystemService(NotificationManager.class);
+        manager.createNotificationChannel(serviceChannel);
     }
 
     @Override
